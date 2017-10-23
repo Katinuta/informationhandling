@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="testAll">
+    <test name="test">
+        <classes>
+            <class name="ExpressionHandlerParserTest"/>
+
+        </classes>
+    </test>
+</suite>
