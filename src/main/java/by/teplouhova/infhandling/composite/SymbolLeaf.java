@@ -6,6 +6,10 @@ public class SymbolLeaf implements Component {
     private String symbol;
     private TypeTextElement typeTextElement;
 
+    public SymbolLeaf(String symbol) {
+        this.symbol = symbol;
+
+    }
     public SymbolLeaf(String symbol,TypeTextElement typeTextElement) {
         this.symbol = symbol;
         this.typeTextElement=typeTextElement;
@@ -19,8 +23,6 @@ public class SymbolLeaf implements Component {
 
     @Override
     public String toString() {
-        return "SymbolLeaf{" +
-                "symbol='" + symbol + '\'' +
-                '}';
+        return symbol;
     }
 }

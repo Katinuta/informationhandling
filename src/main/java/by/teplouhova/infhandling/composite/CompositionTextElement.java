@@ -1,7 +1,6 @@
 package by.teplouhova.infhandling.composite;
 
 import by.teplouhova.infhandling.chainresponsobility.TypeTextElement;
-import by.teplouhova.infhandling.composite.Component;
 
 import java.util.ArrayList;
 
@@ -16,7 +15,7 @@ public class CompositionTextElement implements Component {
     }
 
     public CompositionTextElement(ArrayList<Component> components,TypeTextElement typeTextElement) {
-        this.textElements=new ArrayList<>();
+        this.textElements= components;
         this.typeTextElement=typeTextElement;
     }
 
@@ -45,8 +44,10 @@ public class CompositionTextElement implements Component {
 
     @Override
     public String toString() {
-        return "CompositionTextElement{" +
-                "textElements=" + textElements +
-                '}';
+        String string = new String();
+        for (Component component:textElements ) {
+                string+=component.toString();
+        }
+        return string+" ";
     }
 }

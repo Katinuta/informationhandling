@@ -8,5 +8,6 @@ public enum TypeTextElement {
     NUMBER,
     LETTER,
     TEXT,
-    PUNCTUATION_MARK
+    PUNCTUATION_MARK,
+    SYMBOL_NEW_PARAGRAPH
 }

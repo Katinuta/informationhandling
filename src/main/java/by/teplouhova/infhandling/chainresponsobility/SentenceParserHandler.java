@@ -26,7 +26,7 @@ public class SentenceParserHandler implements ParserHandler {
         CompositionTextElement paragraph= new CompositionTextElement(TypeTextElement.PARAGRAPH);
         while(matcher.find()){
             sentence=matcher.group();
-            System.out.println(sentence);
+         // System.out.println(sentence);
                            paragraph.add(new CompositionTextElement(parent.handleRequest(sentence),TypeTextElement.SENTENCE));
             }
         return paragraph.getTextElements();

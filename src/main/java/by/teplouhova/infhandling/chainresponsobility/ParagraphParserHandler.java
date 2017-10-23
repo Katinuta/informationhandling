@@ -2,6 +2,7 @@ package by.teplouhova.infhandling.chainresponsobility;
 
 import by.teplouhova.infhandling.composite.Component;
 import by.teplouhova.infhandling.composite.CompositionTextElement;
+import by.teplouhova.infhandling.composite.SymbolLeaf;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -29,9 +30,10 @@ public class ParagraphParserHandler implements ParserHandler {
         Matcher matcher=patternParagraph.matcher(component);
         while(matcher.find()){
             paragraph=matcher.group();
-            System.out.println(paragraph);
+           // System.out.println(paragraph);
 
                 text.add(new CompositionTextElement(parent.handleRequest(paragraph),TypeTextElement.PARAGRAPH));
+                text.add(new SymbolLeaf("\n",TypeTextElement.SYMBOL_NEW_PARAGRAPH));
 
         }
         return text.getTextElements();

@@ -74,7 +74,7 @@ public class ExpressionParserHandler {
         //System.out.println(expression);
         for (int index=0;index<expression.length();index++){
             String symbol=String.valueOf(expression.charAt(index));
-            if("+".equals(symbol)||"-".equals(symbol)||isNumber(symbol)){
+            if("+".equals(symbol)||"-".equals(symbol)||isNumber(symbol)&&index>=1){
                 String lastSymbol=operatorsAndNumbers.get(operatorsAndNumbers.size()-1);
                 if(lastSymbol.equals(symbol)||isNumber(lastSymbol)&&isNumber(symbol)){
                     operatorsAndNumbers.set(operatorsAndNumbers.size()-1,lastSymbol+symbol);

@@ -1,39 +1,32 @@
 package by.teplouhova.infhandling;
 
-import by.teplouhova.infhandling.chainresponsobility.ExpressionParserHandler;
-import by.teplouhova.infhandling.chainresponsobility.ParagraphParserHandler;
+import by.teplouhova.infhandling.chainresponsobility.*;
+import by.teplouhova.infhandling.composite.Component;
+import by.teplouhova.infhandling.composite.CompositionTextElement;
+import by.teplouhova.infhandling.composite.SymbolLeaf;
 import by.teplouhova.infhandling.interpreter.AbstractMathExpression;
 import by.teplouhova.infhandling.interpreter.Client;
 import by.teplouhova.infhandling.interpreter.Context;
+import com.sun.deploy.security.ValidationState;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args){
-
-//        String[] str="( - 5 + 1 / 2 * 2 * ( 2 + 5 * 2 - 1 ) ) * 1200".split(" ");
-//        Client client=new Client();
-//       // System.out.println(client.calculate(new ExpressionParserHandler().parseExpressionToPolishNotation(str)));
-//        System.out.println(new ExpressionParserHandler().parseExpressionToArray("(5+ 3++)*2"));
-        String input = "ThisIsATest";
-//from  w  w w .  j  av a 2  s.c  o m
-        // split into words
-        String[] words = input.split("(?=[A-Z])");
-
-        words[0] = capitalizeFirstLetter(words[0]);
-        Arrays.asList(words).stream().forEach(str->System.out.println(str));
-        // join
-        StringBuilder builder = new StringBuilder();
-        for (String s : words) {
-            builder.append(s).append(" ");
-        }
-
-        System.out.println(builder.toString());
-
+        CompositionTextElement component=new CompositionTextElement(
+        new ParagraphParserHandler().handleRequest("D ghvfdihg hgdfghdjf. Ziduhfsid+\\n+ GFJUFUYJFG fsd d gggf."), TypeTextElement.TEXT);
+        ArrayList<Component> arrayList=new ArrayList<>();
+       arrayList.add( new SymbolLeaf("s"));
+        arrayList.add(new SymbolLeaf("t"));
+        arrayList.add(new SymbolLeaf("r"));
+        arrayList.add(new SymbolLeaf("i"));
+        arrayList.add(new SymbolLeaf("n"));
+        arrayList.add(new SymbolLeaf("g"));
+    // System.out.println( new ParagraphParserHandler().handleRequest("D ghvfdihg hgdfghdjf. Ziduhfsid."+"\n"+ "GFJUFUYJFG fsd d gggf."+"\n"));
+      //  System.out.println( new SentenceParserHandler().handleRequest("D ghvf - dihg hgdfghdjf."));
+       Component d=new CompositionTextElement( new ParagraphParserHandler().handleRequest("D 6+5 hgdfghdjf. Ziduhfsid."+"\n"+ "GFJUFUYJFG fsd d gggf."+"\n"),TypeTextElement.TEXT) ;
+        System.out.print(d.toString());
     }
-
-    private static String capitalizeFirstLetter(String in) {
-        return in.substring(0, 1).toUpperCase() + in.substring(1);
-    }
-
 }

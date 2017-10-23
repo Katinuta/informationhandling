@@ -11,13 +11,23 @@ import java.util.regex.Pattern;
 
 public class WordExpressionParserHandler implements ParserHandler {
     private SymbolParserHandler parent;
-    public static final String REGEXP_WORD="\\w+\\(?\\w*\\-*\\s*\\w*\\)?";
-    public static final String REGEXP_EXPRESSION="[()\\d+\\+\\-*/]{1,}";
+     //\(?\w*\-*\s*\w*\)?
+    public static final String REGEXP_WORD="[a-zA-Z]+";
+    public static final String REGEXP_EXPRESSION="\\d+\\+\\d+";
+
+
+    public WordExpressionParserHandler() {
+        parent=new SymbolParserHandler();
+    }
+
+    public WordExpressionParserHandler(SymbolParserHandler parent) {
+        this.parent = parent;
+    }
 
     @Override
     public ArrayList<Component> handleRequest(String text) {
         CompositionTextElement lexeme=new CompositionTextElement(TypeTextElement.LEXEME);
-        text.trim();
+        text=text.trim();
         if(text.length()==1){
             Character ch= text.charAt(0);
             if(Character.isDigit(ch)){
@@ -27,22 +37,25 @@ public class WordExpressionParserHandler implements ParserHandler {
                 lexeme.add(new SymbolLeaf(text,TypeTextElement.LETTER));
 
             }
-
         }else{
 
-            if(Pattern.compile(REGEXP_EXPRESSION).matcher(text).find()){
-                String expression=Pattern.compile(REGEXP_EXPRESSION).matcher(text).group();
+            Pattern pattern =Pattern.compile(REGEXP_EXPRESSION);
+            Matcher matcher=pattern.matcher(text);
+            if(matcher.find()){
+
+                String expression=matcher.group();
+                System.out.println(expression);
                 Double result=new Client().calculate(new ExpressionParserHandler().parseExpressionToPolishNotation(expression));
                 lexeme.add(new SymbolLeaf(result.toString(),
                         TypeTextElement.NUMBER));
                 if(text.length()!=expression.length()){
                     int index=expression.length();
-                    do{
+                    while(index!=text.length()-1){
                         lexeme.add(new SymbolLeaf(String.valueOf(text.charAt(index)),
                                 TypeTextElement.PUNCTUATION_MARK));
                         index++;
                     }
-                    while(index!=text.length()-1);
+
                 }
             }
             if(text.startsWith("\"")||text.startsWith("\'")||text.startsWith("\\(")){
@@ -50,21 +63,26 @@ public class WordExpressionParserHandler implements ParserHandler {
                         TypeTextElement.PUNCTUATION_MARK));
                 text=text.substring(1);
             }
-            String word=Pattern.compile(REGEXP_WORD).matcher(text).group();
-            lexeme.add(new CompositionTextElement(parent.handleRequest(word),TypeTextElement.WORD));
-            if(word.length()!=text.length()){
-                int index=word.length();
-                do{
-                    lexeme.add(new SymbolLeaf(String.valueOf(text.charAt(index)),
-                            TypeTextElement.PUNCTUATION_MARK));
-                    index++;
+            String word=null;
+            Pattern pattern1 =Pattern.compile(REGEXP_WORD);
+            Matcher matcher1=pattern1.matcher(text);
+            if(matcher1.find()){
+                System.out.println(text);
+               word=matcher.group();
+                lexeme.add(new CompositionTextElement(parent.handleRequest(word),TypeTextElement.WORD));
+                if(word.length()!=text.length()){
+                    int index=word.length();
+
+                    while(index!=text.length()){
+                        lexeme.add(new SymbolLeaf(String.valueOf(text.charAt(index)),
+                                TypeTextElement.PUNCTUATION_MARK));
+                        index++;
+                    }
+
                 }
-                while(index!=text.length()-1);
+
             }
-
-
         }
-
         return lexeme.getTextElements();
     }
 }

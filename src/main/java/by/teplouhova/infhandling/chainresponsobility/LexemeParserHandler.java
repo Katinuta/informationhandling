@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class LexemeParserHandler implements ParserHandler {
 
     private WordExpressionParserHandler parent;
-    public static final String REGEXP_LEXEME="\\s*\\.*[\\-,.!?\\)\"\\']{0,3}\\s*";
+    public static final String REGEXP_LEXEME="\\s*\\w*[\\p{Punct}{0,3}|[\\+]{0,2}]\\w*\\s*";
 
     public LexemeParserHandler() {
        parent=new WordExpressionParserHandler();
@@ -27,14 +27,19 @@ public class LexemeParserHandler implements ParserHandler {
         Pattern pattern=Pattern.compile(REGEXP_LEXEME);
         Matcher matcher=pattern.matcher(text);
         String lexeme;
-
+      //System.out.println(text);
         while(matcher.find()){
+
             lexeme=matcher.group();
             String symbol=lexeme.trim();
+
             if(symbol.length()==1&&!Character.isLetter(symbol.charAt(0))&&!Character.isDigit(symbol.charAt(0))){
+
                 sentence.add(new SymbolLeaf(symbol,TypeTextElement.PUNCTUATION_MARK));
-            }else{
-                sentence.add(new CompositionTextElement(parent.handleRequest(lexeme),TypeTextElement.LEXEME));
+            }else if(lexeme.length()!=0){
+             sentence.add(new CompositionTextElement(parent.handleRequest(lexeme),TypeTextElement.LEXEME));
+
+//                sentence.add(new SymbolLeaf(lexeme,TypeTextElement.LEXEME));
             }
         }
         return sentence.getTextElements();
