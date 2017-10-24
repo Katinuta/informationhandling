@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class SentenceParserHandler implements ParserHandler {
 
-    public final static String REGEXP_SENTENCE = ".+\\.";
+    public final static String REGEXP_SENTENCE = "[A-Z]{1}.+\\p{Punct}$";
     private LexemeParserHandler parent;
 
     public SentenceParserHandler() {
