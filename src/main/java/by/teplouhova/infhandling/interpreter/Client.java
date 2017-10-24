@@ -1,11 +1,6 @@
 package by.teplouhova.infhandling.interpreter;
 
-import by.teplouhova.infhandling.chainresponsobility.ExpressionParserHandler;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.BiFunction;
-import java.util.regex.Pattern;
 
 public class Client {
     private Context context;

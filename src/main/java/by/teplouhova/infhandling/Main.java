@@ -4,14 +4,8 @@ import by.teplouhova.infhandling.chainresponsobility.*;
 import by.teplouhova.infhandling.composite.Component;
 import by.teplouhova.infhandling.composite.CompositionTextElement;
 import by.teplouhova.infhandling.composite.SymbolLeaf;
-import by.teplouhova.infhandling.interpreter.AbstractMathExpression;
-import by.teplouhova.infhandling.interpreter.Client;
-import by.teplouhova.infhandling.interpreter.Context;
-import com.sun.deploy.security.ValidationState;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args){

@@ -44,10 +44,10 @@ public class CompositionTextElement implements Component {
 
     @Override
     public String toString() {
-        String string = new String();
+        StringBuilder  string=new StringBuilder() ;
         for (Component component:textElements ) {
-                string+=component.toString();
+                string.append(component.toString());
         }
-        return string+" ";
+        return string.append(" ").toString();
     }
 }
