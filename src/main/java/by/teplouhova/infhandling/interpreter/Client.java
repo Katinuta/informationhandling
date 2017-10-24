@@ -15,7 +15,6 @@ public class Client {
     }
 
     public Double calculate(String expression) {
-        //System.out.println(expression);
         Arrays.asList(expression.split(" ")).stream().forEach(token->{
             AbstractMathExpression action;
             switch (token) {

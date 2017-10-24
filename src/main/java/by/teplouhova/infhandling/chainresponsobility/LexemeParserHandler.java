@@ -10,14 +10,14 @@ import java.util.regex.Pattern;
 
 public class LexemeParserHandler implements ParserHandler {
 
-    private WordExpressionParserHandler parent;
-    public static final String REGEXP_LEXEME="\\s*\\w*[\\p{Punct}{0,3}|[\\+]{0,2}]\\w*\\s*";
+    public static final String REGEXP_LEXEME="\\s*\\w+[\\p{Punct}|[\\+]]{0,2}\\w*\\p{Punct}*\\s*";
+    private ParserHandler parent;
 
     public LexemeParserHandler() {
-       parent=new WordExpressionParserHandler();
+
     }
 
-    public LexemeParserHandler(WordExpressionParserHandler wordParserHandler) {
+    public LexemeParserHandler(WordParserHandler wordParserHandler) {
         this.parent = wordParserHandler;
     }
 
@@ -26,20 +26,23 @@ public class LexemeParserHandler implements ParserHandler {
         CompositionTextElement sentence=new CompositionTextElement(TypeTextElement.SENTENCE);
         Pattern pattern=Pattern.compile(REGEXP_LEXEME);
         Matcher matcher=pattern.matcher(text);
-        String lexeme;
-      //System.out.println(text);
         while(matcher.find()){
 
-            lexeme=matcher.group();
+            String lexeme=matcher.group();
             String symbol=lexeme.trim();
 
             if(symbol.length()==1&&!Character.isLetter(symbol.charAt(0))&&!Character.isDigit(symbol.charAt(0))){
 
                 sentence.add(new SymbolLeaf(symbol,TypeTextElement.PUNCTUATION_MARK));
             }else if(lexeme.length()!=0){
-             sentence.add(new CompositionTextElement(parent.handleRequest(lexeme),TypeTextElement.LEXEME));
+                if(Pattern.compile(ExpressionParserHandler.REGEXP_EXPRESSION).matcher(symbol).find()){
+                    parent=new ExpressionParserHandler();
 
-//                sentence.add(new SymbolLeaf(lexeme,TypeTextElement.LEXEME));
+                }else{
+                    parent=new WordParserHandler();
+                }
+             sentence.add(new CompositionTextElement(parent.handleRequest(lexeme.trim()),TypeTextElement.LEXEME));
+
             }
         }
         return sentence.getTextElements();

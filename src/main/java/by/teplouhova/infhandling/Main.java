@@ -26,7 +26,7 @@ public class Main {
         arrayList.add(new SymbolLeaf("g"));
     // System.out.println( new ParagraphParserHandler().handleRequest("D ghvfdihg hgdfghdjf. Ziduhfsid."+"\n"+ "GFJUFUYJFG fsd d gggf."+"\n"));
       //  System.out.println( new SentenceParserHandler().handleRequest("D ghvf - dihg hgdfghdjf."));
-       Component d=new CompositionTextElement( new ParagraphParserHandler().handleRequest("D 6+5 hgdfghdjf. Ziduhfsid."+"\n"+ "GFJUFUYJFG fsd d gggf."+"\n"),TypeTextElement.TEXT) ;
+       Component d=new CompositionTextElement( new ParagraphParserHandler().handleRequest("D 6+5, hgdfghdjf. Ziduhfsid."+"\n"+ "GFJUFUYJFG fsd d gggf."+"\n"),TypeTextElement.TEXT) ;
         System.out.print(d.toString());
     }
 }

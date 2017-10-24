@@ -20,6 +20,7 @@ public class Context {
     public Double peek(){
         return contextValue.peek();
     }
+
     @Override
     public String toString() {
         return "Context{" +
