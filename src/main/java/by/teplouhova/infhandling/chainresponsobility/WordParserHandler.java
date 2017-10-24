@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class WordParserHandler implements ParserHandler {
     private SymbolParserHandler parent;
-    public static final String REGEXP_WORD = "[a-zA-Z]+";
+    public static final String REGEXP_WORD = "[a-zA-Z]+\\-?[a-zA-Z]*";
 
 
     public WordParserHandler() {
