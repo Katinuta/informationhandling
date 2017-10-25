@@ -1,8 +1,8 @@
-package by.teplouhova.infhandling.chainresponsobility;
+package by.teplouhova.infhandling.parser;
 
-import by.teplouhova.infhandling.composite.Component;
-import by.teplouhova.infhandling.composite.CompositionTextElement;
-import by.teplouhova.infhandling.composite.SymbolLeaf;
+import by.teplouhova.infhandling.composite.*;
+import by.teplouhova.infhandling.constant.MathOperationConst;
+import by.teplouhova.infhandling.constant.SymbolConstant;
 import by.teplouhova.infhandling.interpreter.Client;
 
 import java.util.*;
@@ -14,17 +14,19 @@ public class ExpressionParserHandler implements ParserHandler {
 
     public static final String REGEXP_EXPRESSION = "\\d+\\+\\d+";
     private HashMap<String, Integer> prededence;
+    private ParserHandler parent;
 
 
     public ExpressionParserHandler() {
+        parent=new SymbolParserHandler();
         prededence = new HashMap<>();
-        prededence.put("(", 0);
-        prededence.put("+", 2);
+        prededence.put(SymbolConstant.OPEN_BRACKET, 0);//"("
+        prededence.put(MathOperationConst.OPERATION_PLUS, 2);//"+"
 
-        prededence.put("-", 2);
+        prededence.put(MathOperationConst.OPERATION_MINUS, 2);//"-"
 
-        prededence.put("*", 3);
-        prededence.put("/", 3);
+        prededence.put(MathOperationConst.OPERATION_MULTI, 3);//"*"
+        prededence.put(MathOperationConst.OPERATION_DIVIDE, 3);//"/"
     }
 
     public String parseExpressionToPolishNotation(String expression) {
@@ -37,12 +39,12 @@ public class ExpressionParserHandler implements ParserHandler {
                 polishNotation.add(token);
                 continue;
             }
-            if ("(".equals(token)) {
+            if (SymbolConstant.OPEN_BRACKET.equals(token)) {
                 stackOperation.push(token);
                 continue;
             }
-            if (")".equals(token)) {
-                while (!"(".equals(stackOperation.peek())) {
+            if (SymbolConstant.CLOSE_BRACKET.equals(token)) {
+                while (!SymbolConstant.OPEN_BRACKET.equals(stackOperation.peek())) {
                     polishNotation.add(stackOperation.pop());
                 }
                 stackOperation.pop();
@@ -84,7 +86,8 @@ public class ExpressionParserHandler implements ParserHandler {
 
         for (int index = 0; index < expression.length(); index++) {
             String symbol = String.valueOf(expression.charAt(index));
-            if ("+".equals(symbol) || "-".equals(symbol) || isNumber(symbol) && index >= 1) {
+            if (MathOperationConst.OPERATION_PLUS.equals(symbol) ||
+                    MathOperationConst.OPERATION_MINUS.equals(symbol) || isNumber(symbol) && index >= 1) {
                 String lastSymbol = operatorsAndNumbers.get(operatorsAndNumbers.size() - 1);
                 if (lastSymbol.equals(symbol) || isNumber(lastSymbol) && isNumber(symbol)) {
                     operatorsAndNumbers.set(operatorsAndNumbers.size() - 1, lastSymbol + symbol);
@@ -94,8 +97,11 @@ public class ExpressionParserHandler implements ParserHandler {
             operatorsAndNumbers.add(String.valueOf(symbol));
         }
 
-        while (operatorsAndNumbers.contains("++") || operatorsAndNumbers.contains("--")) {
-            String operation = operatorsAndNumbers.contains("++") ? "++" : "--";
+        while (operatorsAndNumbers.contains(MathOperationConst.OPERATION_DOUBLE_PLUS) ||
+                operatorsAndNumbers.contains(MathOperationConst.OPERATION_DOUBLE_MINUS)) {
+            String operation =
+                    operatorsAndNumbers.contains(MathOperationConst.OPERATION_DOUBLE_PLUS)? MathOperationConst.OPERATION_DOUBLE_PLUS :
+                            MathOperationConst.OPERATION_DOUBLE_MINUS;
             int index = operatorsAndNumbers.indexOf(operation);
             if (isNumber(operatorsAndNumbers.get(index - 1))) {
                 operatorsAndNumbers.set(index, operation.substring(1));
@@ -119,8 +125,7 @@ public class ExpressionParserHandler implements ParserHandler {
         if (matcher.find()) {
             String expression = matcher.group();
             Double result = new Client().calculate(parseExpressionToPolishNotation(expression));
-            lexeme.add(new SymbolLeaf(result.toString(),
-                    TypeTextElement.NUMBER));
+            lexeme.add(new CompositionTextElement(parent.handleRequest(expression),TypeTextElement.EXPRESSION));
             ArrayList<Component> punctuationList = new PunctuationHandler().getPunctuationMarks(text, expression);
             if (punctuationList != null) {
                 punctuationList.stream().forEach(component -> lexeme.add(component));

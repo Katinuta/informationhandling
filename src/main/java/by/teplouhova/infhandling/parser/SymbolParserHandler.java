@@ -1,8 +1,7 @@
-package by.teplouhova.infhandling.chainresponsobility;
+package by.teplouhova.infhandling.parser;
 
-import by.teplouhova.infhandling.composite.Component;
-import by.teplouhova.infhandling.composite.CompositionTextElement;
-import by.teplouhova.infhandling.composite.SymbolLeaf;
+import by.teplouhova.infhandling.composite.*;
+import jdk.nashorn.internal.codegen.types.Type;
 
 import java.util.ArrayList;
 
@@ -14,9 +13,11 @@ public class SymbolParserHandler implements ParserHandler{
         for(int index=0;index<text.length();index++) {
             char symbol=text.charAt(index);
             if(Character.isLetter(symbol)){
-                word.add(new SymbolLeaf(String.valueOf(symbol),TypeTextElement.LETTER));
+                word.add(new SymbolLeaf(symbol, TypeSymbol.LETTER));
+            }else if(Character.isLetter(symbol)){
+                word.add(new SymbolLeaf(symbol, TypeSymbol.NUMBER));
             }else{
-                word.add(new SymbolLeaf(String.valueOf(symbol),TypeTextElement.PUNCTUATION_MARK));
+                word.add(new SymbolLeaf(symbol,TypeSymbol.PUNCTUATION_MARK));
             }
         }
 

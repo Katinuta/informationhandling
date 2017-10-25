@@ -1,4 +1,4 @@
-import by.teplouhova.infhandling.chainresponsobility.ExpressionParserHandler;
+import by.teplouhova.infhandling.parser.ExpressionParserHandler;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;

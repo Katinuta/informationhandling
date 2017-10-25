@@ -1,8 +1,6 @@
-package by.teplouhova.infhandling.chainresponsobility;
+package by.teplouhova.infhandling.parser;
 
-import by.teplouhova.infhandling.composite.Component;
-import by.teplouhova.infhandling.composite.CompositionTextElement;
-import by.teplouhova.infhandling.composite.SymbolLeaf;
+import by.teplouhova.infhandling.composite.*;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -11,7 +9,7 @@ import java.util.regex.Pattern;
 public class ParagraphParserHandler implements ParserHandler {
 
     public static final String REGEXP_PARAGRAPH = "[A-Z]{1}.+\\p{Punct}+\\n";
-    private SentenceParserHandler parent;
+    private ParserHandler parent;
 
 
     public ParagraphParserHandler() {
@@ -31,7 +29,7 @@ public class ParagraphParserHandler implements ParserHandler {
         while (matcher.find()) {
             String paragraph = matcher.group();
             text.add(new CompositionTextElement(parent.handleRequest(paragraph), TypeTextElement.PARAGRAPH));
-            text.add(new SymbolLeaf("\n", TypeTextElement.SYMBOL_NEW_PARAGRAPH));
+            text.add(new SymbolLeaf('\n', TypeSymbol.SYMBOL_NEW_PARAGRAPH));
 
         }
 

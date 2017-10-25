@@ -1,4 +1,4 @@
-package by.teplouhova.infhandling.chainresponsobility;
+package by.teplouhova.infhandling.parser;
 
 import by.teplouhova.infhandling.composite.Component;
 

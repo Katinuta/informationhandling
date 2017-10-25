@@ -1,7 +1,5 @@
 package by.teplouhova.infhandling.composite;
 
-import by.teplouhova.infhandling.chainresponsobility.TypeTextElement;
-
 import java.util.ArrayList;
 
 public class CompositionTextElement implements Component {

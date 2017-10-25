@@ -1,9 +1,10 @@
 package by.teplouhova.infhandling;
 
-import by.teplouhova.infhandling.chainresponsobility.*;
+import by.teplouhova.infhandling.parser.*;
 import by.teplouhova.infhandling.composite.Component;
 import by.teplouhova.infhandling.composite.CompositionTextElement;
 import by.teplouhova.infhandling.composite.SymbolLeaf;
+import by.teplouhova.infhandling.composite.TypeTextElement;
 
 import java.util.ArrayList;
 

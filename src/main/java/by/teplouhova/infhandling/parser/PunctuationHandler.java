@@ -1,7 +1,9 @@
-package by.teplouhova.infhandling.chainresponsobility;
+package by.teplouhova.infhandling.parser;
 
 import by.teplouhova.infhandling.composite.Component;
 import by.teplouhova.infhandling.composite.SymbolLeaf;
+import by.teplouhova.infhandling.composite.TypeSymbol;
+import by.teplouhova.infhandling.composite.TypeTextElement;
 
 import java.util.ArrayList;
 
@@ -13,11 +15,10 @@ public class PunctuationHandler {
             punctuationList= new ArrayList<>();
             int index=coincidence.length();
             while(index!=text.length()){
-                punctuationList.add(new SymbolLeaf(String.valueOf(text.charAt(index)),
-                        TypeTextElement.PUNCTUATION_MARK));
+                punctuationList.add(new SymbolLeaf(text.charAt(index),
+                        TypeSymbol.PUNCTUATION_MARK));
                 index++;
             }
-
         }
         return punctuationList;
     }

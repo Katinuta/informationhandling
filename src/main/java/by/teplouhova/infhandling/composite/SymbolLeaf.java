@@ -1,18 +1,16 @@
 package by.teplouhova.infhandling.composite;
 
-import by.teplouhova.infhandling.chainresponsobility.TypeTextElement;
-
 public class SymbolLeaf implements Component {
-    private String symbol;
-    private TypeTextElement typeTextElement;
+    private Character symbol;
+    private TypeSymbol type;
 
-    public SymbolLeaf(String symbol) {
+    public SymbolLeaf(Character symbol) {
         this.symbol = symbol;
 
     }
-    public SymbolLeaf(String symbol,TypeTextElement typeTextElement) {
+    public SymbolLeaf(Character symbol,TypeSymbol type) {
         this.symbol = symbol;
-        this.typeTextElement=typeTextElement;
+        this.type=type;
     }
 
 
@@ -23,6 +21,6 @@ public class SymbolLeaf implements Component {
 
     @Override
     public String toString() {
-        return symbol;
+        return symbol.toString();
     }
 }

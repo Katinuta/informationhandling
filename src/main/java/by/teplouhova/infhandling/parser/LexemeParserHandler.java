@@ -1,8 +1,6 @@
-package by.teplouhova.infhandling.chainresponsobility;
+package by.teplouhova.infhandling.parser;
 
-import by.teplouhova.infhandling.composite.Component;
-import by.teplouhova.infhandling.composite.CompositionTextElement;
-import by.teplouhova.infhandling.composite.SymbolLeaf;
+import by.teplouhova.infhandling.composite.*;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -33,7 +31,7 @@ public class LexemeParserHandler implements ParserHandler {
 
             if (symbol.length() == 1 && !Character.isLetter(symbol.charAt(0)) && !Character.isDigit(symbol.charAt(0))) {
 
-                sentence.add(new SymbolLeaf(symbol, TypeTextElement.PUNCTUATION_MARK));
+                sentence.add(new SymbolLeaf(symbol.charAt(0), TypeSymbol.PUNCTUATION_MARK));
             } else if (lexeme.length() != 0) {
                 if (Pattern.compile(ExpressionParserHandler.REGEXP_EXPRESSION).matcher(symbol).find()) {
                     parent = new ExpressionParserHandler();
