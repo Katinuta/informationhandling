@@ -1,4 +1,6 @@
-package by.teplouhova.infhandling.composite;
+package by.teplouhova.infhandling.composite.impl;
+
+import by.teplouhova.infhandling.composite.Component;
 
 public class SymbolLeaf implements Component {
     private Character symbol;

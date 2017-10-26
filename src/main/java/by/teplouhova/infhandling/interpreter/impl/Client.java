@@ -1,6 +1,8 @@
-package by.teplouhova.infhandling.interpreter;
+package by.teplouhova.infhandling.interpreter.impl;
 
 import by.teplouhova.infhandling.constant.MathOperationConst;
+import by.teplouhova.infhandling.interpreter.AbstractMathExpression;
+import by.teplouhova.infhandling.interpreter.Context;
 
 import java.util.Arrays;
 
@@ -45,7 +47,7 @@ public class Client {
                     break;
                 }
                 default: {
-                    action = (Context c) -> c.push(Double.valueOf(token));
+                    action = (c) -> c.push(Double.valueOf(token));
 
                 }
             }

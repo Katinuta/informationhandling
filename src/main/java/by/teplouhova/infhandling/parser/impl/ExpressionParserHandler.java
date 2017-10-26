@@ -1,9 +1,13 @@
-package by.teplouhova.infhandling.parser;
+package by.teplouhova.infhandling.parser.impl;
 
 import by.teplouhova.infhandling.composite.*;
+import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
+import by.teplouhova.infhandling.composite.impl.TypeTextElement;
 import by.teplouhova.infhandling.constant.MathOperationConst;
 import by.teplouhova.infhandling.constant.SymbolConstant;
-import by.teplouhova.infhandling.interpreter.Client;
+import by.teplouhova.infhandling.interpreter.impl.Client;
+import by.teplouhova.infhandling.parser.ParserHandler;
+import by.teplouhova.infhandling.parser.PunctuationHandler;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -12,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class ExpressionParserHandler implements ParserHandler {
 
-    public static final String REGEXP_EXPRESSION = "\\d+\\+\\d+";
+    public static final String REGEXP_EXPRESSION = "[\\d\\+\\-\\*\\/\\(\\)]{3,}";
     private HashMap<String, Integer> prededence;
     private ParserHandler parent;
 
@@ -118,20 +122,23 @@ public class ExpressionParserHandler implements ParserHandler {
     }
 
     @Override
-    public ArrayList<Component> handleRequest(String text) {
+    public Component handleRequest(String text) {
         CompositionTextElement lexeme = new CompositionTextElement(TypeTextElement.LEXEME);
         Pattern pattern = Pattern.compile(REGEXP_EXPRESSION);
         Matcher matcher = pattern.matcher(text);
         if (matcher.find()) {
+
             String expression = matcher.group();
+           // System.out.println( expression);
             Double result = new Client().calculate(parseExpressionToPolishNotation(expression));
-            lexeme.add(new CompositionTextElement(parent.handleRequest(expression),TypeTextElement.EXPRESSION));
+            lexeme.add(parent.handleRequest(result.toString()));
+         //   System.out.println( result);
             ArrayList<Component> punctuationList = new PunctuationHandler().getPunctuationMarks(text, expression);
             if (punctuationList != null) {
                 punctuationList.stream().forEach(component -> lexeme.add(component));
             }
 
         }
-        return lexeme.getTextElements();
+        return lexeme;
     }
 }

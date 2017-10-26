@@ -1,14 +1,19 @@
-package by.teplouhova.infhandling.parser;
+package by.teplouhova.infhandling.parser.impl;
 
 import by.teplouhova.infhandling.composite.*;
+import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
+import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
+import by.teplouhova.infhandling.composite.impl.TypeSymbol;
+import by.teplouhova.infhandling.composite.impl.TypeTextElement;
+import by.teplouhova.infhandling.parser.ParserHandler;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LexemeParserHandler implements ParserHandler {
 
-    public static final String REGEXP_LEXEME = "\\s*\\w+[\\p{Punct}|[\\+]]{0,2}\\w*\\p{Punct}*\\s*";
+    public static final String REGEXP_LEXEME = "\\s*\\w+[\\p{Punct}|[\\+\\-]]{0,2}\\w*\\p{Punct}*\\s*";
+  // public static final String REGEXP_LEXEME ="\\s*(\\w+\\-?[a-zA-Z]*)?(\\d\\+\\d)?\\p{Punct}*\\s*";
     private ParserHandler parent;
 
     public LexemeParserHandler() {
@@ -20,7 +25,7 @@ public class LexemeParserHandler implements ParserHandler {
     }
 
     @Override
-    public ArrayList<Component> handleRequest(String text) {
+    public Component handleRequest(String text) {
         CompositionTextElement sentence = new CompositionTextElement(TypeTextElement.SENTENCE);
         Pattern pattern = Pattern.compile(REGEXP_LEXEME);
         Matcher matcher = pattern.matcher(text);
@@ -39,10 +44,10 @@ public class LexemeParserHandler implements ParserHandler {
                 } else {
                     parent = new WordParserHandler();
                 }
-                sentence.add(new CompositionTextElement(parent.handleRequest(lexeme.trim()), TypeTextElement.LEXEME));
+                sentence.add(parent.handleRequest(lexeme.trim()));
 
             }
         }
-        return sentence.getTextElements();
+        return sentence;
     }
 }

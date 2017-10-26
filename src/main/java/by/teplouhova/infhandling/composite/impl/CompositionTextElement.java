@@ -1,4 +1,7 @@
-package by.teplouhova.infhandling.composite;
+package by.teplouhova.infhandling.composite.impl;
+
+import by.teplouhova.infhandling.composite.Component;
+import by.teplouhova.infhandling.composite.impl.TypeTextElement;
 
 import java.util.ArrayList;
 

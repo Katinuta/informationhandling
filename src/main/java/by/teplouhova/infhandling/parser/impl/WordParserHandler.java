@@ -1,7 +1,13 @@
-package by.teplouhova.infhandling.parser;
+package by.teplouhova.infhandling.parser.impl;
 
 import by.teplouhova.infhandling.composite.*;
+import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
+import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
+import by.teplouhova.infhandling.composite.impl.TypeSymbol;
+import by.teplouhova.infhandling.composite.impl.TypeTextElement;
 import by.teplouhova.infhandling.constant.SymbolConstant;
+import by.teplouhova.infhandling.parser.ParserHandler;
+import by.teplouhova.infhandling.parser.PunctuationHandler;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -9,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class WordParserHandler implements ParserHandler {
     private ParserHandler parent;
-    public static final String REGEXP_WORD = "[a-zA-Z]+\\-?[a-zA-Z]*";
+    public static final String REGEXP_WORD = "\\w+\\-?[a-zA-Z]*";
 
 
     public WordParserHandler() {
@@ -21,8 +27,9 @@ public class WordParserHandler implements ParserHandler {
     }
 
     @Override
-    public ArrayList<Component> handleRequest(String text) {
+    public Component handleRequest(String text) {
         CompositionTextElement lexeme = new CompositionTextElement(TypeTextElement.LEXEME);
+        System.out.println(text);
         if (text.length() == 1) {
             Character ch = text.charAt(0);
             if (Character.isDigit(ch)) {
@@ -44,7 +51,7 @@ public class WordParserHandler implements ParserHandler {
 
             if (matcher.find()) {
                 String word = matcher.group();
-                lexeme.add(new CompositionTextElement(parent.handleRequest(word), TypeTextElement.WORD));
+                lexeme.add(parent.handleRequest(word));
                 ArrayList<Component> punctuationList = new PunctuationHandler().getPunctuationMarks(text, word);
 
                 if (punctuationList != null) {
@@ -53,6 +60,6 @@ public class WordParserHandler implements ParserHandler {
 
             }
         }
-        return lexeme.getTextElements();
+        return lexeme;
     }
 }
