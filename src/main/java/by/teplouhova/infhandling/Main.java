@@ -7,21 +7,23 @@ import by.teplouhova.infhandling.composite.SymbolLeaf;
 import by.teplouhova.infhandling.composite.TypeTextElement;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args){
-        CompositionTextElement component=new CompositionTextElement(
-        new ParagraphParserHandler().handleRequest("D ghvfdihg hgdfghdjf. Ziduhfsid+\\n+ GFJUFUYJFG fsd d gggf."), TypeTextElement.TEXT);
-        ArrayList<Component> arrayList=new ArrayList<>();
-       arrayList.add( new SymbolLeaf("s"));
-        arrayList.add(new SymbolLeaf("t"));
-        arrayList.add(new SymbolLeaf("r"));
-        arrayList.add(new SymbolLeaf("i"));
-        arrayList.add(new SymbolLeaf("n"));
-        arrayList.add(new SymbolLeaf("g"));
-    // System.out.println( new ParagraphParserHandler().handleRequest("D ghvfdihg hgdfghdjf. Ziduhfsid."+"\n"+ "GFJUFUYJFG fsd d gggf."+"\n"));
-      //  System.out.println( new SentenceParserHandler().handleRequest("D ghvf - dihg hgdfghdjf."));
-       Component d=new CompositionTextElement( new ParagraphParserHandler().handleRequest("D 6+5, hgdfghdjf. Ziduhfsid."+"\n"+ "GFJUFUYJFG fsd d gggf."+"\n"),TypeTextElement.TEXT) ;
+
+               CompositionTextElement d =new CompositionTextElement(TypeTextElement.TEXT) ;
+        d.add(new ParagraphParserHandler().handleRequest("\tD 6+5, hgdfghdjf. Ziduhfsid."+"\n"+ "\tGFJUFUYJFG fsd d gggf."+"\n"));
         System.out.print(d.toString());
+//        Pattern pattern=Pattern.compile("[A-Z]{1}(\\s*\\w+\\s*)+[\\.\\!\\?]{0,3}");
+//        Matcher matcher=pattern.matcher("D hgdfghdjf. Ziduhfsid."+"\n");
+//
+//        while(matcher.find()){
+//            String sen=matcher.group();
+//                System.out.println(sen);
+//
+//        }
+
     }
 }

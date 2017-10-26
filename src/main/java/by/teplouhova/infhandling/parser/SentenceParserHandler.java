@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class SentenceParserHandler implements ParserHandler {
 
-    public final static String REGEXP_SENTENCE = "[A-Z]{1}.+\\p{Punct}$";
+    public final static String REGEXP_SENTENCE = "[A-Z]{1}.+[\\.\\!\\?]{0,3}";
     private ParserHandler parent;
 
     public SentenceParserHandler() {
@@ -18,17 +18,18 @@ public class SentenceParserHandler implements ParserHandler {
     }
 
     @Override
-    public ArrayList<Component> handleRequest(String text) {
+    public Component handleRequest(String text) {
         Pattern patternSentence = Pattern.compile(REGEXP_SENTENCE);
         Matcher matcher = patternSentence.matcher(text);
         CompositionTextElement paragraph = new CompositionTextElement(TypeTextElement.PARAGRAPH);
 
         while (matcher.find()) {
             String sentence = matcher.group();
-            paragraph.add(new CompositionTextElement(parent.handleRequest(sentence), TypeTextElement.SENTENCE));
+         //  System.out.println(sentence);
+            paragraph.add(parent.handleRequest(sentence));
         }
 
-        return paragraph.getTextElements();
+        return paragraph;
     }
 
 

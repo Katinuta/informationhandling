@@ -45,7 +45,7 @@ public class Client {
                     break;
                 }
                 default: {
-                    action = (Context c) -> c.push(Double.valueOf(token));
+                    action = (c) -> c.push(Double.valueOf(token));
 
                 }
             }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class SymbolParserHandler implements ParserHandler{
     @Override
-    public ArrayList<Component> handleRequest(String text) {
+    public Component handleRequest(String text) {
         CompositionTextElement word=new CompositionTextElement(TypeTextElement.WORD);
 
         for(int index=0;index<text.length();index++) {
@@ -21,6 +21,6 @@ public class SymbolParserHandler implements ParserHandler{
             }
         }
 
-        return word.getTextElements();
+        return word;
     }
 }

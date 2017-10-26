@@ -4,6 +4,7 @@ public enum TypeSymbol{
     NUMBER,
     LETTER,
     PUNCTUATION_MARK,
-    SYMBOL_NEW_PARAGRAPH
+    SYMBOL_NEW_STRING,
+    SYMBOL_TAB
 
 }
