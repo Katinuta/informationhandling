@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class CompositionTextElement implements Component {
 
-    private TypeTextElement typeTextElement;
+    private TypeTextElement type;
     private ArrayList<Component> textElements;
 
-    public CompositionTextElement(TypeTextElement typeTextElement) {
+    public CompositionTextElement(TypeTextElement type) {
         textElements = new ArrayList<>();
-        this.typeTextElement=typeTextElement;
+        this.type=type;
     }
 
-    public CompositionTextElement(ArrayList<Component> components,TypeTextElement typeTextElement) {
+    public CompositionTextElement(ArrayList<Component> components,TypeTextElement type) {
         this.textElements= components;
-        this.typeTextElement=typeTextElement;
+        this.type=type;
     }
 
 
@@ -28,7 +28,7 @@ public class CompositionTextElement implements Component {
     }
 
     public TypeTextElement getTypeTextElement() {
-        return typeTextElement;
+        return type;
     }
 
     @Override
