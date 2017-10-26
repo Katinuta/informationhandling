@@ -1,14 +1,19 @@
-package by.teplouhova.infhandling.parser;
+package by.teplouhova.infhandling.parser.impl;
 
 import by.teplouhova.infhandling.composite.*;
+import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
+import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
+import by.teplouhova.infhandling.composite.impl.TypeSymbol;
+import by.teplouhova.infhandling.composite.impl.TypeTextElement;
+import by.teplouhova.infhandling.parser.ParserHandler;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LexemeParserHandler implements ParserHandler {
 
     public static final String REGEXP_LEXEME = "\\s*\\w+[\\p{Punct}|[\\+\\-]]{0,2}\\w*\\p{Punct}*\\s*";
+  // public static final String REGEXP_LEXEME ="\\s*(\\w+\\-?[a-zA-Z]*)?(\\d\\+\\d)?\\p{Punct}*\\s*";
     private ParserHandler parent;
 
     public LexemeParserHandler() {

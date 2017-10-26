@@ -1,14 +1,8 @@
 package by.teplouhova.infhandling;
 
-import by.teplouhova.infhandling.parser.*;
-import by.teplouhova.infhandling.composite.Component;
-import by.teplouhova.infhandling.composite.CompositionTextElement;
-import by.teplouhova.infhandling.composite.SymbolLeaf;
-import by.teplouhova.infhandling.composite.TypeTextElement;
-
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
+import by.teplouhova.infhandling.composite.impl.TypeTextElement;
+import by.teplouhova.infhandling.parser.impl.ParagraphParserHandler;
 
 public class Main {
     public static void main(String[] args){

@@ -1,4 +1,4 @@
-package by.teplouhova.infhandling.composite;
+package by.teplouhova.infhandling.composite.impl;
 
 public enum TypeSymbol{
     NUMBER,

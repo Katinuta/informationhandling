@@ -1,4 +1,4 @@
-import by.teplouhova.infhandling.interpreter.Client;
+import by.teplouhova.infhandling.interpreter.impl.Client;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

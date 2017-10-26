@@ -1,7 +1,13 @@
-package by.teplouhova.infhandling.parser;
+package by.teplouhova.infhandling.parser.impl;
 
 import by.teplouhova.infhandling.composite.*;
+import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
+import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
+import by.teplouhova.infhandling.composite.impl.TypeSymbol;
+import by.teplouhova.infhandling.composite.impl.TypeTextElement;
 import by.teplouhova.infhandling.constant.SymbolConstant;
+import by.teplouhova.infhandling.parser.ParserHandler;
+import by.teplouhova.infhandling.parser.PunctuationHandler;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

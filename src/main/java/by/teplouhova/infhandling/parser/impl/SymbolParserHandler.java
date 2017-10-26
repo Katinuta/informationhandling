@@ -1,11 +1,13 @@
-package by.teplouhova.infhandling.parser;
+package by.teplouhova.infhandling.parser.impl;
 
 import by.teplouhova.infhandling.composite.*;
-import jdk.nashorn.internal.codegen.types.Type;
+import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
+import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
+import by.teplouhova.infhandling.composite.impl.TypeSymbol;
+import by.teplouhova.infhandling.composite.impl.TypeTextElement;
+import by.teplouhova.infhandling.parser.ParserHandler;
 
-import java.util.ArrayList;
-
-public class SymbolParserHandler implements ParserHandler{
+public class SymbolParserHandler implements ParserHandler {
     @Override
     public Component handleRequest(String text) {
         CompositionTextElement word=new CompositionTextElement(TypeTextElement.WORD);

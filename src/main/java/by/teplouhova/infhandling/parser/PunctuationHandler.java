@@ -1,9 +1,8 @@
 package by.teplouhova.infhandling.parser;
 
 import by.teplouhova.infhandling.composite.Component;
-import by.teplouhova.infhandling.composite.SymbolLeaf;
-import by.teplouhova.infhandling.composite.TypeSymbol;
-import by.teplouhova.infhandling.composite.TypeTextElement;
+import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
+import by.teplouhova.infhandling.composite.impl.TypeSymbol;
 
 import java.util.ArrayList;
 

@@ -1,15 +1,20 @@
-package by.teplouhova.infhandling.parser;
+package by.teplouhova.infhandling.parser.impl;
 
 import by.teplouhova.infhandling.composite.*;
+import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
+import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
+import by.teplouhova.infhandling.composite.impl.TypeSymbol;
+import by.teplouhova.infhandling.composite.impl.TypeTextElement;
+import by.teplouhova.infhandling.constant.PatternConst;
 import by.teplouhova.infhandling.constant.SymbolConstant;
+import by.teplouhova.infhandling.parser.ParserHandler;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ParagraphParserHandler implements ParserHandler {
 
-    public static final String REGEXP_PARAGRAPH = "\\s+[A-Z]{1}.+\\p{Punct}+\\n";
+
     private ParserHandler parent;
 
 
@@ -23,7 +28,7 @@ public class ParagraphParserHandler implements ParserHandler {
 
     @Override
     public Component handleRequest(String component) {
-        Pattern patternParagraph = Pattern.compile(REGEXP_PARAGRAPH);
+        Pattern patternParagraph = Pattern.compile(PatternConst.REGEXP_PARAGRAPH);
         CompositionTextElement text = new CompositionTextElement(TypeTextElement.TEXT);
         Matcher matcher = patternParagraph.matcher(component);
 
