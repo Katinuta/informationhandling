@@ -29,7 +29,7 @@ public class WordParserHandler implements ParserHandler {
     @Override
     public Component handleRequest(String text) {
         CompositionTextElement lexeme = new CompositionTextElement(TypeTextElement.LEXEME);
-        System.out.println(text);
+      //  System.out.println(text);
         if (text.length() == 1) {
             Character ch = text.charAt(0);
             if (Character.isDigit(ch)) {

@@ -26,7 +26,7 @@ public class SentenceParserHandler implements ParserHandler {
 
         while (matcher.find()) {
             String sentence = matcher.group();
-         //  System.out.println(sentence);
+          System.out.println(sentence);
             paragraph.add(parent.handleRequest(sentence));
         }
 

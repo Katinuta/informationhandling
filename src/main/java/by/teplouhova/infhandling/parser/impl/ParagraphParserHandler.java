@@ -34,7 +34,6 @@ public class ParagraphParserHandler implements ParserHandler {
 
         while (matcher.find()) {
             String paragraph = matcher.group();
-          //  System.out.println(paragraph);
             text.add(new SymbolLeaf(SymbolConstant.TAB, TypeSymbol.SYMBOL_TAB));
             text.add(parent.handleRequest(paragraph));
             text.add(new SymbolLeaf(SymbolConstant.NEW_STRING, TypeSymbol.SYMBOL_NEW_STRING));
