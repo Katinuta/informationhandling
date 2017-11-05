@@ -25,19 +25,4 @@ public class SymbolLeaf implements Component {
     public String toString() {
         return symbol.toString();
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SymbolLeaf that = (SymbolLeaf) o;
-
-        return symbol != null ? symbol.equals(that.symbol) : that.symbol == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return symbol != null ? symbol.hashCode() : 0;
-    }
 }

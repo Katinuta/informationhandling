@@ -4,6 +4,7 @@ import by.teplouhova.infhandling.composite.Component;
 import by.teplouhova.infhandling.composite.impl.TypeTextElement;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CompositionTextElement implements Component {
 
@@ -34,6 +35,13 @@ public class CompositionTextElement implements Component {
         return type;
     }
 
+    public Iterator<Component> getIterator(){
+        return textElements.iterator();
+    }
+
+    public int getSizeTextElement(){
+        return textElements.size();
+    }
     @Override
     public int countComponent() {
         int count = 0;
