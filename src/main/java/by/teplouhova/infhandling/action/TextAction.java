@@ -36,11 +36,17 @@ public class TextAction {
                 ArrayList<Component> listLexemes=getListElements((CompositionTextElement) sentence);
                 ArrayList<Component> listWords=new ArrayList<>();
                         listLexemes.stream().forEach(lexeme-> listWords.addAll(getListElements((CompositionTextElement) lexeme)));
-               // System.out.println(listWords);
+                System.out.println(listWords);
+                ArrayList<String> words=new ArrayList<>();
+                for (Component word:listWords
+                     ) {
+                    words.add(word.toString().trim());
+                }
+                System.out.println(words);
                 for(int index=0;index<listWords.size()-1;index++){
-                    Component word=listWords.get(index);
+                    String word=listWords.get(index).toString().trim();
                 //    System.out.println(word.countComponent());
-                    int indexInput=listWords.indexOf(word);
+                    int indexInput=words.lastIndexOf(word);
                    // System.out.println(indexInput);
                     if(indexInput>index&&indexInput!=-1){
                         countSentence++;
@@ -78,7 +84,7 @@ public class TextAction {
         ArrayList<Component> listElements=new ArrayList<>();
         while (componentIterator.hasNext()){
             Component element=componentIterator.next();
-            System.out.println(element);
+
             if(element.countComponent()>1){
 
                 listElements.add(element);
