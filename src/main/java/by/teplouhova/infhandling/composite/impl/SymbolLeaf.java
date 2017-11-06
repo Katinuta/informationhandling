@@ -15,6 +15,23 @@ public class SymbolLeaf implements Component {
         this.type=type;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SymbolLeaf that = (SymbolLeaf) o;
+
+        if (symbol != null ? !symbol.equals(that.symbol) : that.symbol != null) return false;
+        return type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = symbol != null ? symbol.hashCode() : 0;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        return result;
+    }
 
     @Override
     public int countComponent() {

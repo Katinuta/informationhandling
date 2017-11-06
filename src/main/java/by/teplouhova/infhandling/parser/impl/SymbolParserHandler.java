@@ -16,7 +16,7 @@ public class SymbolParserHandler implements ParserHandler {
             char symbol=text.charAt(index);
             if(Character.isLetter(symbol)){
                 word.add(new SymbolLeaf(symbol, TypeSymbol.LETTER));
-            }else if(Character.isLetter(symbol)){
+            }else if(Character.isDigit(symbol)){
                 word.add(new SymbolLeaf(symbol, TypeSymbol.NUMBER));
             }else{
                 word.add(new SymbolLeaf(symbol,TypeSymbol.PUNCTUATION_MARK));

@@ -17,7 +17,7 @@ public class Main {
              //   CompositionTextElement d =new CompositionTextElement(TypeTextElement.TEXT) ;
        //d.add(new ParagraphParserHandler().handleRequest("\tD ((3- 1) + 5++)*2, main fsjd sdfhj main. Ziduhfsid."+"\n"+ "\tGFJUFUYJFG fsd d gggf."+"\n"));
         CompositionTextElement d= (CompositionTextElement) new ParagraphParserHandler().
-                handleRequest("\tD ((3- 1) + 5++)*2, main fsjd sdfhj main. Ziduhfsid."+"\n"+ "\tGFJUFUYJFG fsd d gggf."+"\n");
+                handleRequest("\tD ((3- 1) + 5++)*2, fsjd sdfhj main. On hjkj on."+"\n"+ "\tGFJUFUY vfdv  fgvfg gvfvb gdfgfgb gdfrgr JFG fsd d gggf."+"\n");
 
 //System.out.print(d.toString());
         //System.out.print(d.toString());
@@ -26,7 +26,7 @@ public class Main {
 //        if(matcher.find()){
 //            System.out.println(true);
 //        }
-       System.out.println(new TextAction().calculateSentenceWithSameWords(d));
+       System.out.println(new TextAction().orderByLexemeCount(d));
         int i=0;
      // d.getIterator().forEachRemaining(component -> System.out.println(":  "+ component) );
 
