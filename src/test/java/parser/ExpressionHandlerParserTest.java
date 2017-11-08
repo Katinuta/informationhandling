@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class ExpressionHandlerParserTest {
 
@@ -25,31 +26,44 @@ public class ExpressionHandlerParserTest {
         parserHandler = new ExpressionParserHandler();
     }
 
-    @DataProvider(name="expression")
-    public Object[][] createData(){
-        return new Object [][]{
+    @DataProvider(name = "expression")
+    public Object[][] createData() {
+        return new Object[][]{
                 {
-                     "(5+ 3++)*2",  new CompositionTextElement(
-                        Arrays.asList(new SymbolLeaf('1', TypeSymbol.NUMBER), new SymbolLeaf('6', TypeSymbol.NUMBER),
-
-                                new SymbolLeaf('.', TypeSymbol.PUNCTUATION_MARK), new SymbolLeaf('0', TypeSymbol.NUMBER))
-                        , TypeTextElement.WORD)
+                        "(5+ 3++)*2", new CompositionTextElement(Arrays.asList(
+                        new CompositionTextElement(Arrays.asList(
+                                new SymbolLeaf('1', TypeSymbol.NUMBER),
+                                new SymbolLeaf('8', TypeSymbol.NUMBER),
+                                new SymbolLeaf('.', TypeSymbol.PUNCTUATION_MARK),
+                                new SymbolLeaf('0', TypeSymbol.NUMBER)), TypeTextElement.WORD))
+                        , TypeTextElement.LEXEME
+                )
                 },
                 {
-                    "( 9/ --3)+ 2--",  new CompositionTextElement(
-                        Arrays.asList(new SymbolLeaf('3', TypeSymbol.NUMBER),
-
-                                new SymbolLeaf('.', TypeSymbol.PUNCTUATION_MARK), new SymbolLeaf('0', TypeSymbol.NUMBER))
-                        , TypeTextElement.WORD)
+                        "( 9/ --3)+ 2--", new CompositionTextElement(Arrays.asList(
+                        new CompositionTextElement(Arrays.asList(new SymbolLeaf('3', TypeSymbol.NUMBER),
+                                new SymbolLeaf('.', TypeSymbol.PUNCTUATION_MARK),
+                                new SymbolLeaf('0', TypeSymbol.NUMBER)), TypeTextElement.WORD))
+                        , TypeTextElement.LEXEME
+                )
+                },
+                {
+                        "((3- 1) + 5++)*2.", new CompositionTextElement(Arrays.asList(
+                        new CompositionTextElement(Arrays.asList(
+                                new SymbolLeaf('1', TypeSymbol.NUMBER),
+                                new SymbolLeaf('6', TypeSymbol.NUMBER),
+                                new SymbolLeaf('.', TypeSymbol.PUNCTUATION_MARK),
+                                new SymbolLeaf('0', TypeSymbol.NUMBER)), TypeTextElement.WORD),
+                        new SymbolLeaf('.', TypeSymbol.PUNCTUATION_MARK))
+                        , TypeTextElement.LEXEME)
                 }
         };
     }
 
-
     @Test(dataProvider = "expression")
     public void parseExpressionToArrayTest(String expression, Component expected) {
-        Component actual=parserHandler.handleRequest(expression);
-        assertEquals(actual, expected);
+        Component actual = parserHandler.handleRequest(expression);
+        assertTrue(actual.equals(expected));
     }
 
 

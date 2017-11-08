@@ -5,6 +5,7 @@ import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
 import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
 import by.teplouhova.infhandling.composite.impl.TypeSymbol;
 import by.teplouhova.infhandling.composite.impl.TypeTextElement;
+import by.teplouhova.infhandling.constant.PatternConst;
 import by.teplouhova.infhandling.constant.SymbolConstant;
 import by.teplouhova.infhandling.parser.ParserHandler;
 import by.teplouhova.infhandling.parser.PunctuationHandler;
@@ -14,9 +15,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WordParserHandler implements ParserHandler {
-    private ParserHandler parent;
-    public static final String REGEXP_WORD = "\\w+\\-?[a-zA-Z]*";
 
+    private ParserHandler parent;
 
     public WordParserHandler() {
         parent = new SymbolParserHandler();
@@ -29,7 +29,6 @@ public class WordParserHandler implements ParserHandler {
     @Override
     public Component handleRequest(String text) {
         CompositionTextElement lexeme = new CompositionTextElement(TypeTextElement.LEXEME);
-      //  System.out.println(text);
         if (text.length() == 1) {
             Character ch = text.charAt(0);
             if (Character.isDigit(ch)) {
@@ -46,7 +45,7 @@ public class WordParserHandler implements ParserHandler {
                 text = text.substring(1);
             }
 
-            Pattern pattern = Pattern.compile(REGEXP_WORD);
+            Pattern pattern = Pattern.compile(PatternConst.REGEXP_WORD);
             Matcher matcher = pattern.matcher(text);
 
             if (matcher.find()) {

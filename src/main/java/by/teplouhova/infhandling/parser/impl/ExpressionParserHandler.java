@@ -34,7 +34,7 @@ public class ExpressionParserHandler implements ParserHandler {
         prededence.put(MathOperationConst.OPERATION_DIVIDE, 3);//"/"
     }
 
-    public String parseExpressionToPolishNotation(String expression) {
+    private String parseExpressionToPolishNotation(String expression) {
         List<String> operatorsAndNumbers = parseExpressionToArray(expression);
 
         Queue<String> polishNotation = new LinkedList<>();
@@ -86,7 +86,7 @@ public class ExpressionParserHandler implements ParserHandler {
         }
     }
 
-    public List<String> parseExpressionToArray(String expression) {
+   private List<String> parseExpressionToArray(String expression) {
         List<String> operatorsAndNumbers = new ArrayList<>();
 
         for (int index = 0; index < expression.length(); index++) {
@@ -131,8 +131,7 @@ public class ExpressionParserHandler implements ParserHandler {
 
             String expression = matcher.group();
             Double result = new Client().calculate(parseExpressionToPolishNotation(expression));
-            lexeme.add(parent.handleRequest(result.toString()));
-         //   System.out.println( result);
+            lexeme.add(parent.handleRequest(String.valueOf(result)));
             ArrayList<Component> punctuationList = new PunctuationHandler().getPunctuationMarks(text, expression);
             if (punctuationList != null) {
                 punctuationList.stream().forEach(component -> lexeme.add(component));

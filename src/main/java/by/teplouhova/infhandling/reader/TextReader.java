@@ -11,21 +11,21 @@ import java.util.stream.Stream;
 
 public class TextReader {
 
-    private final static Logger LOGGER= LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
 
-    public String TextReader(String fileName){
-        StringBuilder stringBuilder=new StringBuilder();
-        String text=null;
+    public String TextReader(String fileName) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String text = null;
         try {
-            Stream<String> readerStream= Files.lines(Paths.get(fileName));
-           readerStream.forEach(line->stringBuilder.append(line));
-           text=stringBuilder.toString();
-           if(text.isEmpty()){
-               LOGGER.log(Level.FATAL,"File is empty");
-               throw new RuntimeException("File is empty");
-           }
+            Stream<String> readerStream = Files.lines(Paths.get(fileName));
+            readerStream.forEach(line -> stringBuilder.append(line));
+            text = stringBuilder.toString();
+            if (text.isEmpty()) {
+                LOGGER.log(Level.FATAL, "File is empty");
+                throw new RuntimeException("File is empty");
+            }
         } catch (IOException e) {
-            LOGGER.log(Level.FATAL,"File is not found");
+            LOGGER.log(Level.FATAL, "File is not found");
             throw new RuntimeException("File is not found");
         }
         return text;

@@ -4,6 +4,7 @@ import by.teplouhova.infhandling.composite.Component;
 import by.teplouhova.infhandling.composite.impl.TypeTextElement;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -78,12 +79,27 @@ public class CompositionTextElement implements Component {
         return count;
     }
 
+
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder();
         for (Component component : textElements) {
             string.append(component.toString());
+            if(component.countComponent()!=1){
+                if(((CompositionTextElement)component).type==TypeTextElement.LEXEME&&textElements.indexOf(component)!=textElements.size()-1){
+                    string.append(" ");
+                }
+            }else{
+//               if(((CompositionTextElement)component).type==TypeTextElement.LEXEME){
+//                        SymbolLeaf symbol= (SymbolLeaf) ((CompositionTextElement) component).get(0);
+//                }
+//                if(((SymbolLeaf) component).getType()==TypeSymbol.LETTER||
+//                        ((SymbolLeaf) component).getType()==TypeSymbol.NUMBER){
+//                    string.append(" ")
+//                }
+            }
         }
-        return string.append(" ").toString();
+
+        return string.toString();
     }
 }

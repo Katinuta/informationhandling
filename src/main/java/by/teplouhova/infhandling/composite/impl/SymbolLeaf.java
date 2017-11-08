@@ -15,6 +15,10 @@ public class SymbolLeaf implements Component {
         this.type=type;
     }
 
+    public TypeSymbol getType() {
+        return type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,6 +41,8 @@ public class SymbolLeaf implements Component {
     public int countComponent() {
         return 1;
     }
+
+
 
     @Override
     public String toString() {

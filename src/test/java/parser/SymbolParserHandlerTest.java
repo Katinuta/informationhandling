@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class SymbolParserHandlerTest {
 
@@ -41,6 +42,6 @@ public class SymbolParserHandlerTest {
     @Test(dataProvider = "word")
     public void handleRequestSymbols(String word, Component expected) {
         Component actual = new SymbolParserHandler().handleRequest(word);
-        assertEquals(actual, expected);
+        assertTrue(actual.equals(expected));
     }
 }

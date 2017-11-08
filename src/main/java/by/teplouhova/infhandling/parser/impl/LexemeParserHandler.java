@@ -32,7 +32,6 @@ public class LexemeParserHandler implements ParserHandler {
 
             String lexeme = matcher.group();
             String symbol = lexeme.trim();
-
             if (symbol.length() == 1 && !Character.isLetter(symbol.charAt(0)) && !Character.isDigit(symbol.charAt(0))) {
 
                 sentence.add(new SymbolLeaf(symbol.charAt(0), TypeSymbol.PUNCTUATION_MARK));
