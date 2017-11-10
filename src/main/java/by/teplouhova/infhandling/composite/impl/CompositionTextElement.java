@@ -86,17 +86,10 @@ public class CompositionTextElement implements Component {
         for (Component component : textElements) {
             string.append(component.toString());
             if(component.countComponent()!=1){
-                if(((CompositionTextElement)component).type==TypeTextElement.LEXEME&&textElements.indexOf(component)!=textElements.size()-1){
+                if(((CompositionTextElement)component).type==TypeTextElement.LEXEME&&
+                            textElements.indexOf(component)!=textElements.size()-1){
                     string.append(" ");
                 }
-            }else{
-//               if(((CompositionTextElement)component).type==TypeTextElement.LEXEME){
-//                        SymbolLeaf symbol= (SymbolLeaf) ((CompositionTextElement) component).get(0);
-//                }
-//                if(((SymbolLeaf) component).getType()==TypeSymbol.LETTER||
-//                        ((SymbolLeaf) component).getType()==TypeSymbol.NUMBER){
-//                    string.append(" ")
-//                }
             }
         }
 

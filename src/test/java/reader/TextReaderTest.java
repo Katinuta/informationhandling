@@ -1,6 +1,6 @@
-package parser;
+package reader;
 
-import by.teplouhova.shape.reader.PyramidDataReader;
+import by.teplouhova.infhandling.reader.TextReader;
 import org.testng.annotations.*;
 
 import java.io.File;
@@ -17,8 +17,8 @@ import static org.testng.Assert.assertEquals;
  */
 
 public class TextReaderTest {
-    private List<String> expectedList;
-    private PyramidDataReader dataReader;
+    private String expected;
+    private TextReader reader;
     private File fileNew;
     private File fileEmpty;
 
@@ -29,38 +29,38 @@ public class TextReaderTest {
         try (FileWriter fileWriter = new FileWriter(fileNew)) {
             fileNew.createNewFile();
             fileEmpty.createNewFile();
-            fileWriter.write("string\n" + "string\n" + "string");
+            fileWriter.write("\tstring\n" + "string\n" + "string");
 
         } catch (IOException e) {
             throw new RuntimeException("File not found " + e);
         }
-        expectedList = Arrays.asList("string", "string", "string");
-        dataReader = new PyramidDataReader();
+        expected = "\tstring\n" + "string\n" + "string\n";
+        reader = new TextReader();
     }
 
     @Test
     public void readDataFromFileTest() {
 
-        List<String> actualList = dataReader.readDataFromFile(fileNew.getPath());
-        assertEquals(actualList, expectedList);
+        String actual = reader.textFromFileReader(fileNew.getPath());
+        assertEquals(actual, expected);
 
     }
 
     @Test(expectedExceptions = RuntimeException.class)
     public void readDataFromFileException() {
-        dataReader.readDataFromFile("data.txt");
+        reader.textFromFileReader("data.txt");
     }
 
     @Test(expectedExceptions = RuntimeException.class)
     public void noDataInFileException() {
-        dataReader.readDataFromFile(fileEmpty.getPath());
+        reader.textFromFileReader(fileEmpty.getPath());
     }
 
     @AfterClass
     public void after() {
         fileNew.delete();
         fileEmpty.delete();
-        dataReader = null;
+        reader = null;
     }
 
 }

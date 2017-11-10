@@ -52,8 +52,8 @@ public class TextAction {
             if (component.countComponent() > 1) {
                 CompositionTextElement paragraph = (CompositionTextElement) component;
                 Iterator<Component> sentenceIterator = paragraph.getIterator();
-                while (sentenceIterator.hasNext()) {
 
+                while (sentenceIterator.hasNext()) {
                     CompositionTextElement sentence = (CompositionTextElement) sentenceIterator.next();
                     Component firstLexeme = sentence.get(0);
                     Component lastLexeme = sentence.get(sentence.getSizeTextElement() - 1);
@@ -66,11 +66,13 @@ public class TextAction {
         return componentText.toString();
     }
 
-    public String orderByLexemeCount(CompositionTextElement text) {
+    public String orderByLexemeCount(String text) {
 
+        CompositionTextElement componentText= (CompositionTextElement) new ParagraphParserHandler().handleRequest(text);
         String result = new String();
         ArrayList<CompositionTextElement> listSentences = new ArrayList<>();
-        Iterator<Component> paragraphIterator = text.getIterator();
+        Iterator<Component> paragraphIterator = componentText.getIterator();
+
         while (paragraphIterator.hasNext()) {
             Component component = paragraphIterator.next();
             if (component.countComponent() > 1) {

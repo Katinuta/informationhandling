@@ -13,20 +13,20 @@ public class TextReader {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public String TextReader(String fileName) {
+    public String textFromFileReader(String fileName) {
         StringBuilder stringBuilder = new StringBuilder();
         String text = null;
         try {
             Stream<String> readerStream = Files.lines(Paths.get(fileName));
-            readerStream.forEach(line -> stringBuilder.append(line));
+            readerStream.forEach(line -> stringBuilder.append(line).append("\n"));
             text = stringBuilder.toString();
             if (text.isEmpty()) {
-                LOGGER.log(Level.FATAL, "File is empty");
-                throw new RuntimeException("File is empty");
+                LOGGER.log(Level.FATAL, "File " + fileName + "is empty");
+                throw new RuntimeException("File " + fileName + "is empty");
             }
         } catch (IOException e) {
-            LOGGER.log(Level.FATAL, "File is not found");
-            throw new RuntimeException("File is not found");
+            LOGGER.log(Level.FATAL, "File is not found " + fileName);
+            throw new RuntimeException("File is not found " + fileName, e);
         }
         return text;
     }
