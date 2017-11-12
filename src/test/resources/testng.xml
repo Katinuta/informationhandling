@@ -2,7 +2,19 @@
 <suite name="testAll">
     <test name="test">
         <classes>
-            <class name="parser.ExpressionHandlerParserTest"/>
+            <class name="test.by.teplouhova.infhandling.action.CalcSentenceWithSameWordTest"/>
+            <class name="test.by.teplouhova.infhandling.action.ChangeLastFirstLexemeTest"/>
+            <class name="test.by.teplouhova.infhandling.action.InsertValueInTextTest"/>
+            <class name="test.by.teplouhova.infhandling.action.OrderByLexemeCountTest"/>
+            <class name="test.by.teplouhova.infhandling.interpreter.ClientTest"/>
+            <class name="test.by.teplouhova.infhandling.parser.ExpressionHandlerParserTest"/>
+            <class name="test.by.teplouhova.infhandling.parser.LexemeParserHandlerTest"/>
+            <class name="test.by.teplouhova.infhandling.parser.ParagraphParserHandlerTest"/>
+            <class name="test.by.teplouhova.infhandling.parser.PunctuationHandlerTest"/>
+            <class name="test.by.teplouhova.infhandling.parser.SentenceParserHandlerTest"/>
+            <class name="test.by.teplouhova.infhandling.parser.SymbolParserHandlerTest"/>
+            <class name="test.by.teplouhova.infhandling.parser.WordParserHandlerTest"/>
+            <class name="test.by.teplouhova.infhandling.reader.TextReaderTest"/>
 
         </classes>
     </test>

@@ -10,9 +10,10 @@ public class SymbolLeaf implements Component {
         this.symbol = symbol;
 
     }
-    public SymbolLeaf(Character symbol,TypeSymbol type) {
+
+    public SymbolLeaf(Character symbol, TypeSymbol type) {
         this.symbol = symbol;
-        this.type=type;
+        this.type = type;
     }
 
     public TypeSymbol getType() {
@@ -41,7 +42,6 @@ public class SymbolLeaf implements Component {
     public int countComponent() {
         return 1;
     }
-
 
 
     @Override

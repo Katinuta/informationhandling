@@ -1,4 +1,4 @@
-package reader;
+package test.by.teplouhova.infhandling.reader;
 
 import by.teplouhova.infhandling.reader.TextReader;
 import org.testng.annotations.*;
@@ -6,8 +6,6 @@ import org.testng.annotations.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
@@ -16,6 +14,7 @@ import static org.testng.Assert.assertEquals;
  * Created by SMIT_Creator on 12-Sep-17.
  */
 
+@SuppressWarnings("SpellCheckingInspection")
 public class TextReaderTest {
     private String expected;
     private TextReader reader;

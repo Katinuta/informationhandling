@@ -1,16 +1,8 @@
-package action;
+package test.by.teplouhova.infhandling.action;
 
 import by.teplouhova.infhandling.action.TextAction;
-import by.teplouhova.infhandling.composite.Component;
-import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
-import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
-import by.teplouhova.infhandling.composite.impl.TypeSymbol;
-import by.teplouhova.infhandling.composite.impl.TypeTextElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.testng.Assert.assertEquals;
 

@@ -5,7 +5,7 @@ import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
 import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
 import by.teplouhova.infhandling.composite.impl.TypeSymbol;
 import by.teplouhova.infhandling.composite.impl.TypeTextElement;
-import by.teplouhova.infhandling.constant.PatternConst;
+import by.teplouhova.infhandling.constant.PatternConstant;
 import by.teplouhova.infhandling.parser.ParserHandler;
 
 import java.util.regex.Matcher;
@@ -26,7 +26,7 @@ public class LexemeParserHandler implements ParserHandler {
     @Override
     public Component handleRequest(String text) {
         CompositionTextElement sentence = new CompositionTextElement(TypeTextElement.SENTENCE);
-        Pattern pattern = Pattern.compile(PatternConst.REGEXP_LEXEME);
+        Pattern pattern = Pattern.compile(PatternConstant.REGEXP_LEXEME);
         Matcher matcher = pattern.matcher(text);
         while (matcher.find()) {
 
@@ -36,7 +36,7 @@ public class LexemeParserHandler implements ParserHandler {
 
                 sentence.add(new SymbolLeaf(symbol.charAt(0), TypeSymbol.PUNCTUATION_MARK));
             } else if (lexeme.length() != 0) {
-                if (Pattern.compile(PatternConst.REGEXP_EXPRESSION).matcher(symbol).find()) {
+                if (Pattern.compile(PatternConstant.REGEXP_EXPRESSION).matcher(symbol).find()) {
                     parent = new ExpressionParserHandler();
 
                 } else {

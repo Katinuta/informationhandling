@@ -15,7 +15,7 @@ public class TextReader {
 
     public String textFromFileReader(String fileName) {
         StringBuilder stringBuilder = new StringBuilder();
-        String text = null;
+        String text;
         try {
             Stream<String> readerStream = Files.lines(Paths.get(fileName));
             readerStream.forEach(line -> stringBuilder.append(line).append("\n"));

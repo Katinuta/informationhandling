@@ -3,8 +3,8 @@ package by.teplouhova.infhandling.parser.impl;
 import by.teplouhova.infhandling.composite.*;
 import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
 import by.teplouhova.infhandling.composite.impl.TypeTextElement;
-import by.teplouhova.infhandling.constant.MathOperationConst;
-import by.teplouhova.infhandling.constant.PatternConst;
+import by.teplouhova.infhandling.constant.MathOperationConstant;
+import by.teplouhova.infhandling.constant.PatternConstant;
 import by.teplouhova.infhandling.constant.SymbolConstant;
 import by.teplouhova.infhandling.interpreter.impl.Client;
 import by.teplouhova.infhandling.parser.ParserHandler;
@@ -17,21 +17,39 @@ import java.util.stream.Collectors;
 
 public class ExpressionParserHandler implements ParserHandler {
 
-
     private HashMap<String, Integer> prededence;
     private ParserHandler parent;
 
-
     public ExpressionParserHandler() {
-        parent=new SymbolParserHandler();
+        parent = new SymbolParserHandler();
         prededence = new HashMap<>();
         prededence.put(SymbolConstant.OPEN_BRACKET, 0);//"("
-        prededence.put(MathOperationConst.OPERATION_PLUS, 2);//"+"
+        prededence.put(MathOperationConstant.OPERATION_PLUS, 2);//"+"
 
-        prededence.put(MathOperationConst.OPERATION_MINUS, 2);//"-"
+        prededence.put(MathOperationConstant.OPERATION_MINUS, 2);//"-"
 
-        prededence.put(MathOperationConst.OPERATION_MULTI, 3);//"*"
-        prededence.put(MathOperationConst.OPERATION_DIVIDE, 3);//"/"
+        prededence.put(MathOperationConstant.OPERATION_MULTI, 3);//"*"
+        prededence.put(MathOperationConstant.OPERATION_DIVIDE, 3);//"/"
+    }
+
+
+    @Override
+    public Component handleRequest(String text) {
+        CompositionTextElement lexeme = new CompositionTextElement(TypeTextElement.LEXEME);
+        Pattern pattern = Pattern.compile(PatternConstant.REGEXP_EXPRESSION);
+        Matcher matcher = pattern.matcher(text);
+        if (matcher.find()) {
+
+            String expression = matcher.group();
+            Double result = new Client().calculate(parseExpressionToPolishNotation(expression));
+            lexeme.add(parent.handleRequest(String.valueOf(result)));
+            ArrayList<Component> punctuationList = new PunctuationHandler().getPunctuationMarks(text, expression);
+            if (punctuationList != null) {
+                punctuationList.forEach(lexeme::add);
+            }
+
+        }
+        return lexeme;
     }
 
     private String parseExpressionToPolishNotation(String expression) {
@@ -86,13 +104,13 @@ public class ExpressionParserHandler implements ParserHandler {
         }
     }
 
-   private List<String> parseExpressionToArray(String expression) {
+    private List<String> parseExpressionToArray(String expression) {
         List<String> operatorsAndNumbers = new ArrayList<>();
 
         for (int index = 0; index < expression.length(); index++) {
             String symbol = String.valueOf(expression.charAt(index));
-            if (MathOperationConst.OPERATION_PLUS.equals(symbol) ||
-                    MathOperationConst.OPERATION_MINUS.equals(symbol) || isNumber(symbol) && index >= 1) {
+            if (MathOperationConstant.OPERATION_PLUS.equals(symbol) ||
+                    MathOperationConstant.OPERATION_MINUS.equals(symbol) || isNumber(symbol) && index >= 1) {
                 String lastSymbol = operatorsAndNumbers.get(operatorsAndNumbers.size() - 1);
                 if (lastSymbol.equals(symbol) || isNumber(lastSymbol) && isNumber(symbol)) {
                     operatorsAndNumbers.set(operatorsAndNumbers.size() - 1, lastSymbol + symbol);
@@ -102,11 +120,12 @@ public class ExpressionParserHandler implements ParserHandler {
             operatorsAndNumbers.add(String.valueOf(symbol));
         }
 
-        while (operatorsAndNumbers.contains(MathOperationConst.OPERATION_DOUBLE_PLUS) ||
-                operatorsAndNumbers.contains(MathOperationConst.OPERATION_DOUBLE_MINUS)) {
+        while (operatorsAndNumbers.contains(MathOperationConstant.OPERATION_DOUBLE_PLUS) ||
+                operatorsAndNumbers.contains(MathOperationConstant.OPERATION_DOUBLE_MINUS)) {
             String operation =
-                    operatorsAndNumbers.contains(MathOperationConst.OPERATION_DOUBLE_PLUS)? MathOperationConst.OPERATION_DOUBLE_PLUS :
-                            MathOperationConst.OPERATION_DOUBLE_MINUS;
+                    operatorsAndNumbers.contains(MathOperationConstant.OPERATION_DOUBLE_PLUS) ?
+                            MathOperationConstant.OPERATION_DOUBLE_PLUS :
+                            MathOperationConstant.OPERATION_DOUBLE_MINUS;
             int index = operatorsAndNumbers.indexOf(operation);
             if (isNumber(operatorsAndNumbers.get(index - 1))) {
                 operatorsAndNumbers.set(index, operation.substring(1));
@@ -120,24 +139,5 @@ public class ExpressionParserHandler implements ParserHandler {
 
         operatorsAndNumbers = operatorsAndNumbers.stream().filter(s -> !s.equals(" ")).collect(Collectors.toList());
         return operatorsAndNumbers;
-    }
-
-    @Override
-    public Component handleRequest(String text) {
-        CompositionTextElement lexeme = new CompositionTextElement(TypeTextElement.LEXEME);
-        Pattern pattern = Pattern.compile(PatternConst.REGEXP_EXPRESSION);
-        Matcher matcher = pattern.matcher(text);
-        if (matcher.find()) {
-
-            String expression = matcher.group();
-            Double result = new Client().calculate(parseExpressionToPolishNotation(expression));
-            lexeme.add(parent.handleRequest(String.valueOf(result)));
-            ArrayList<Component> punctuationList = new PunctuationHandler().getPunctuationMarks(text, expression);
-            if (punctuationList != null) {
-                punctuationList.stream().forEach(component -> lexeme.add(component));
-            }
-
-        }
-        return lexeme;
     }
 }

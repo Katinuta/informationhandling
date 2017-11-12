@@ -1,6 +1,6 @@
 package by.teplouhova.infhandling.constant;
 
-public class MathOperationConst {
+public class MathOperationConstant {
     public static final String OPERATION_MINUS = "-";
     public static final String OPERATION_PLUS = "+";
     public static final String OPERATION_MULTI = "*";

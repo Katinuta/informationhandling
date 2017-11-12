@@ -1,4 +1,4 @@
-package parser;
+package test.by.teplouhova.infhandling.parser;
 
 import by.teplouhova.infhandling.composite.Component;
 import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
@@ -6,7 +6,6 @@ import by.teplouhova.infhandling.composite.impl.TypeSymbol;
 import by.teplouhova.infhandling.parser.PunctuationHandler;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import sun.awt.Symbol;
 
 import java.util.ArrayList;
 import java.util.Arrays;

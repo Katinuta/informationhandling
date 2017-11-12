@@ -3,19 +3,17 @@ package by.teplouhova.infhandling.action;
 import by.teplouhova.infhandling.composite.Component;
 import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
 import by.teplouhova.infhandling.composite.impl.TypeTextElement;
+import by.teplouhova.infhandling.constant.PatternConstant;
 import by.teplouhova.infhandling.parser.impl.ParagraphParserHandler;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TextAction {
 
-    public static final String REGEXP_EXPRESSION_WITH_I_J = "[\\d\\+\\-\\*\\/\\(\\)\\sij]{3,}";
-
     public String insertValueInText(String text, int i, int j) {
-        Pattern pattern = Pattern.compile(TextAction.REGEXP_EXPRESSION_WITH_I_J);
+        Pattern pattern = Pattern.compile(PatternConstant.REGEXP_EXPRESSION_WITH_I_J);
         Matcher matcher = pattern.matcher(text);
         if (matcher.find()) {
             String fromText = matcher.group();
@@ -27,12 +25,13 @@ public class TextAction {
     }
 
     public int calculateSentenceWithSameWords(String text) {
-        CompositionTextElement component= (CompositionTextElement) new ParagraphParserHandler().handleRequest(text);
+        CompositionTextElement component = (CompositionTextElement) new ParagraphParserHandler().handleRequest(text);
         int countSentence = 0;
         if (component.getTypeTextElement().equals(TypeTextElement.TEXT)) {
             ArrayList<Component> listParagraphs = getListElements(component);
             ArrayList<Component> listSentence = new ArrayList<>();
-            listParagraphs.stream().forEach(paragraph -> listSentence.addAll(getListElements((CompositionTextElement) paragraph)));
+            listParagraphs.forEach(paragraph -> listSentence.addAll(getListElements((CompositionTextElement) paragraph)));
+
             for (Component sentence : listSentence) {
                 if (isSentenceContainSameWords((CompositionTextElement) sentence)) {
                     countSentence++;
@@ -45,7 +44,7 @@ public class TextAction {
 
     public String changeFirstLastLexeme(String text) {
 
-        CompositionTextElement componentText= (CompositionTextElement) new ParagraphParserHandler().handleRequest(text);
+        CompositionTextElement componentText = (CompositionTextElement) new ParagraphParserHandler().handleRequest(text);
         Iterator<Component> paragraphIterator = componentText.getIterator();
         while (paragraphIterator.hasNext()) {
             Component component = paragraphIterator.next();
@@ -61,14 +60,13 @@ public class TextAction {
                     sentence.set(sentence.getSizeTextElement() - 1, firstLexeme);
                 }
             }
-
         }
         return componentText.toString();
     }
 
     public String orderByLexemeCount(String text) {
 
-        CompositionTextElement componentText= (CompositionTextElement) new ParagraphParserHandler().handleRequest(text);
+        CompositionTextElement componentText = (CompositionTextElement) new ParagraphParserHandler().handleRequest(text);
         String result = new String();
         ArrayList<CompositionTextElement> listSentences = new ArrayList<>();
         Iterator<Component> paragraphIterator = componentText.getIterator();
@@ -84,6 +82,7 @@ public class TextAction {
             }
         }
         listSentences.sort(Comparator.comparing(CompositionTextElement::getSizeTextElement));
+
         for (CompositionTextElement sentence : listSentences) {
             result += sentence + "\n";
         }
@@ -95,12 +94,12 @@ public class TextAction {
         ArrayList<Component> listWords = new ArrayList<>();
         listLexemes.stream().forEach(lexeme -> listWords.addAll(getListElements((CompositionTextElement) lexeme)));
         ArrayList<String> words = new ArrayList<>();
-        listWords.stream().forEach(word -> words.add(word.toString().trim().toLowerCase()));
+        listWords.forEach(word -> words.add(word.toString().trim().toLowerCase()));
 
         for (int index = 0; index < listWords.size() - 1; index++) {
             String word = listWords.get(index).toString().trim();
             int indexInput = words.lastIndexOf(word.toLowerCase());
-            if (indexInput > index && indexInput != -1) {
+            if (indexInput > index) {
                 return true;
             }
         }
@@ -109,6 +108,7 @@ public class TextAction {
 
     private ArrayList<Component> getListElements(Component component) {
         ArrayList<Component> listElements = null;
+
         if (component.countComponent() > 1) {
             listElements = new ArrayList<>();
             Iterator<Component> componentIterator = ((CompositionTextElement) component).getIterator();

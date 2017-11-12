@@ -5,6 +5,5 @@ public enum TypeTextElement {
     PARAGRAPH,
     WORD,
     LEXEME,
-    TEXT,
-    EXPRESSION
+    TEXT
 }

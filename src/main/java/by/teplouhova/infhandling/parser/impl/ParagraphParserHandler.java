@@ -5,7 +5,7 @@ import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
 import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
 import by.teplouhova.infhandling.composite.impl.TypeSymbol;
 import by.teplouhova.infhandling.composite.impl.TypeTextElement;
-import by.teplouhova.infhandling.constant.PatternConst;
+import by.teplouhova.infhandling.constant.PatternConstant;
 import by.teplouhova.infhandling.constant.SymbolConstant;
 import by.teplouhova.infhandling.parser.ParserHandler;
 
@@ -28,7 +28,7 @@ public class ParagraphParserHandler implements ParserHandler {
 
     @Override
     public Component handleRequest(String component) {
-        Pattern patternParagraph = Pattern.compile(PatternConst.REGEXP_PARAGRAPH);
+        Pattern patternParagraph = Pattern.compile(PatternConstant.REGEXP_PARAGRAPH);
         CompositionTextElement text = new CompositionTextElement(TypeTextElement.TEXT);
         Matcher matcher = patternParagraph.matcher(component);
 
@@ -37,7 +37,6 @@ public class ParagraphParserHandler implements ParserHandler {
             text.add(new SymbolLeaf(SymbolConstant.TAB, TypeSymbol.SYMBOL_TAB));
             text.add(parent.handleRequest(paragraph));
             text.add(new SymbolLeaf(SymbolConstant.NEW_STRING, TypeSymbol.SYMBOL_NEW_STRING));
-
         }
 
         return text;

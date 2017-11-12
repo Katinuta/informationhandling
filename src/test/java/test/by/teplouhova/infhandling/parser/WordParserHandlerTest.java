@@ -1,4 +1,4 @@
-package parser;
+package test.by.teplouhova.infhandling.parser;
 
 import by.teplouhova.infhandling.composite.Component;
 import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
@@ -9,10 +9,8 @@ import by.teplouhova.infhandling.parser.impl.WordParserHandler;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import javax.lang.model.element.TypeElement;
 import java.util.Arrays;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class WordParserHandlerTest {

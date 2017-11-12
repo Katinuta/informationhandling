@@ -1,4 +1,4 @@
-package action;
+package test.by.teplouhova.infhandling.action;
 
 import by.teplouhova.infhandling.action.TextAction;
 import org.testng.annotations.DataProvider;

@@ -5,7 +5,7 @@ import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
 import by.teplouhova.infhandling.composite.impl.SymbolLeaf;
 import by.teplouhova.infhandling.composite.impl.TypeSymbol;
 import by.teplouhova.infhandling.composite.impl.TypeTextElement;
-import by.teplouhova.infhandling.constant.PatternConst;
+import by.teplouhova.infhandling.constant.PatternConstant;
 import by.teplouhova.infhandling.constant.SymbolConstant;
 import by.teplouhova.infhandling.parser.ParserHandler;
 import by.teplouhova.infhandling.parser.PunctuationHandler;
@@ -39,13 +39,14 @@ public class WordParserHandler implements ParserHandler {
             }
         } else {
 
-            if (text.startsWith(SymbolConstant.DOUBLE_QUOT_MARK) || text.startsWith(SymbolConstant.QUOT_MARK) || text.startsWith(SymbolConstant.OPEN_BRACKET)) {
+            if (text.startsWith(SymbolConstant.DOUBLE_QUOT_MARK) || text.startsWith(SymbolConstant.QUOT_MARK) ||
+                    text.startsWith(SymbolConstant.OPEN_BRACKET)) {
                 lexeme.add(new SymbolLeaf(text.charAt(0),
                         TypeSymbol.PUNCTUATION_MARK));
                 text = text.substring(1);
             }
 
-            Pattern pattern = Pattern.compile(PatternConst.REGEXP_WORD);
+            Pattern pattern = Pattern.compile(PatternConstant.REGEXP_WORD);
             Matcher matcher = pattern.matcher(text);
 
             if (matcher.find()) {
@@ -54,7 +55,7 @@ public class WordParserHandler implements ParserHandler {
                 ArrayList<Component> punctuationList = new PunctuationHandler().getPunctuationMarks(text, word);
 
                 if (punctuationList != null) {
-                    punctuationList.stream().forEach(component -> lexeme.add(component));
+                    punctuationList.forEach(lexeme::add);
                 }
 
             }

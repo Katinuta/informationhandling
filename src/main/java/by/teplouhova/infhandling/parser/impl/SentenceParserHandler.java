@@ -3,7 +3,7 @@ package by.teplouhova.infhandling.parser.impl;
 import by.teplouhova.infhandling.composite.Component;
 import by.teplouhova.infhandling.composite.impl.CompositionTextElement;
 import by.teplouhova.infhandling.composite.impl.TypeTextElement;
-import by.teplouhova.infhandling.constant.PatternConst;
+import by.teplouhova.infhandling.constant.PatternConstant;
 import by.teplouhova.infhandling.parser.ParserHandler;
 
 import java.util.regex.Matcher;
@@ -20,7 +20,7 @@ public class SentenceParserHandler implements ParserHandler {
 
     @Override
     public Component handleRequest(String text) {
-        Pattern patternSentence = Pattern.compile(PatternConst.REGEXP_SENTENCE);
+        Pattern patternSentence = Pattern.compile(PatternConstant.REGEXP_SENTENCE);
         Matcher matcher = patternSentence.matcher(text);
         CompositionTextElement paragraph = new CompositionTextElement(TypeTextElement.PARAGRAPH);
 
@@ -31,7 +31,5 @@ public class SentenceParserHandler implements ParserHandler {
 
         return paragraph;
     }
-
-
 }
 

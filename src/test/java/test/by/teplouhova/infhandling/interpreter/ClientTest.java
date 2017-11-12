@@ -1,4 +1,4 @@
-package interpreter;
+package test.by.teplouhova.infhandling.interpreter;
 
 import by.teplouhova.infhandling.interpreter.impl.Client;
 import org.testng.annotations.DataProvider;

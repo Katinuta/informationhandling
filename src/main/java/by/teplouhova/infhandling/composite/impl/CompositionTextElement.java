@@ -1,10 +1,8 @@
 package by.teplouhova.infhandling.composite.impl;
 
 import by.teplouhova.infhandling.composite.Component;
-import by.teplouhova.infhandling.composite.impl.TypeTextElement;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,11 +26,6 @@ public class CompositionTextElement implements Component {
         textElements.add(text);
     }
 
-    public void add(int index, Component text) {
-        textElements.add(index,text);
-    }
-
-
     public TypeTextElement getTypeTextElement() {
         return type;
     }
@@ -48,8 +41,9 @@ public class CompositionTextElement implements Component {
     public Component get(int index) {
         return textElements.get(index);
     }
-    public Component set(int index,Component component) {
-        return textElements.set(index,component);
+
+    public void set(int index, Component component) {
+        textElements.set(index, component);
     }
 
     @Override
@@ -85,9 +79,9 @@ public class CompositionTextElement implements Component {
         StringBuilder string = new StringBuilder();
         for (Component component : textElements) {
             string.append(component.toString());
-            if(component.countComponent()!=1){
-                if(((CompositionTextElement)component).type==TypeTextElement.LEXEME&&
-                            textElements.indexOf(component)!=textElements.size()-1){
+            if (component.countComponent() != 1) {
+                if (((CompositionTextElement) component).type == TypeTextElement.LEXEME &&
+                        textElements.indexOf(component) != textElements.size() - 1) {
                     string.append(" ");
                 }
             }

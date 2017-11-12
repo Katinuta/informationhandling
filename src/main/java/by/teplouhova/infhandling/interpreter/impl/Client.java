@@ -1,6 +1,6 @@
 package by.teplouhova.infhandling.interpreter.impl;
 
-import by.teplouhova.infhandling.constant.MathOperationConst;
+import by.teplouhova.infhandling.constant.MathOperationConstant;
 import by.teplouhova.infhandling.interpreter.AbstractMathExpression;
 import by.teplouhova.infhandling.interpreter.Context;
 
@@ -14,14 +14,14 @@ public class Client {
     }
 
     public Double calculate(String expression) {
-        Arrays.asList(expression.split(" ")).stream().forEach(token -> {
+        Arrays.asList(expression.split(" ")).forEach(token -> {
             AbstractMathExpression action;
             switch (token) {
-                case MathOperationConst.OPERATION_PLUS: {
+                case MathOperationConstant.OPERATION_PLUS: {
                     action = (c) -> c.push(c.pop() + c.pop());
                     break;
                 }
-                case MathOperationConst.OPERATION_MINUS: {
+                case MathOperationConstant.OPERATION_MINUS: {
                     action = (c) -> {
                         double d1 = c.pop();
                         double d2;
@@ -34,11 +34,11 @@ public class Client {
                     };
                     break;
                 }
-                case MathOperationConst.OPERATION_MULTI: {
+                case MathOperationConstant.OPERATION_MULTI: {
                     action = (c) -> c.push(c.pop() * c.pop());
                     break;
                 }
-                case MathOperationConst.OPERATION_DIVIDE: {
+                case MathOperationConstant.OPERATION_DIVIDE: {
                     action = (Context c) -> {
                         double d1 = c.pop();
                         double d2 = c.pop();
